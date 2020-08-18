@@ -32,7 +32,7 @@ export default class ModalSelectorLayout extends React.PureComponent {
     title: PropTypes.node,
 
     /** Fixed text displayed above the list */
-    subtitle: PropTypes.node,
+    subtitle: PropTypes.string,
 
     /** OK button callback, called with the currently selected item  */
     onOk: PropTypes.func,

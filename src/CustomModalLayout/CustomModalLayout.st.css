@@ -37,3 +37,7 @@
 .root::footnote::innerContent {
   justify-content: flex-start;
 }
+
+.root::content {
+  flex: 1 1 auto;
+}

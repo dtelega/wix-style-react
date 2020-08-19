@@ -194,6 +194,8 @@ export default class ModalSelectorLayout extends React.PureComponent {
       withSearch,
       searchDebounceMs,
       onCancel,
+      height,
+      maxHeight,
       onOk,
       cancelButtonText,
       okButtonText,
@@ -213,10 +215,11 @@ export default class ModalSelectorLayout extends React.PureComponent {
     } = this.state;
 
     const enabledItems = this._getEnabledItems(selectedItems);
-    const heights = this._calcHeights();
 
     return (
       <CustomModalLayout
+        className={css.modalContent}
+        style={{ height, maxHeight }}
         dataHook={dataHook}
         showHeaderDivider
         width="600px"
@@ -237,94 +240,60 @@ export default class ModalSelectorLayout extends React.PureComponent {
         subtitle={subtitle}
         removeContentPadding
       >
-        <div
-          style={{ height: heights.height, maxHeight: heights.maxHeight }}
-          className={css.modalBody}
-          data-hook={dataHooks.modalBody}
-        >
-          {isLoaded && !isEmpty && (
-            <div className={css.subheaderWrapper}>
-              {withSearch && (
-                <Search
-                  dataHook={dataHooks.search}
-                  placeholder={searchPlaceholder}
-                  onChange={this._onSearchChange}
-                  onClear={this._onClear}
-                  debounceMs={searchDebounceMs}
-                  value={searchValue}
-                />
-              )}
-            </div>
-          )}
-          {((items.length === 0 && !isLoaded) || isSearching) && (
-            <div className={css.mainLoaderWrapper}>
-              <Loader size="medium" dataHook={dataHooks.mainLoader} />
-            </div>
-          )}
+        {isLoaded && !isEmpty && (
+          <div className={css.subheaderWrapper}>
+            {withSearch && (
+              <Search
+                dataHook={dataHooks.search}
+                placeholder={searchPlaceholder}
+                onChange={this._onSearchChange}
+                onClear={this._onClear}
+                debounceMs={searchDebounceMs}
+                value={searchValue}
+              />
+            )}
+          </div>
+        )}
+        {((items.length === 0 && !isLoaded) || isSearching) && (
+          <div className={css.mainLoaderWrapper}>
+            <Loader size="medium" dataHook={dataHooks.mainLoader} />
+          </div>
+        )}
+        {isEmpty && (
+          <div
+            data-hook={dataHooks.emptyState}
+            className={css.emptyStateWrapper}
+            children={emptyState}
+          />
+        )}
 
-          {isEmpty && (
-            <div
-              data-hook={dataHooks.emptyState}
-              className={css.emptyStateWrapper}
-              children={emptyState}
-            />
-          )}
+        {(!isLoaded || items.length > 0 || isSearching) && (
+          <InfiniteScroll
+            key={searchValue}
+            loadMore={() => this._loadMore()}
+            hasMore={this._hasMore()}
+            useWindow={false}
+            children={this._renderItems()}
+            loader={
+              items.length > 0 && (
+                <div className={css.nextPageLoaderWrapper}>
+                  <Loader size="small" dataHook={dataHooks.nextPageLoader} />
+                </div>
+              )
+            }
+          />
+        )}
 
-          {(!isLoaded || items.length > 0 || isSearching) && (
-            <InfiniteScroll
-              key={searchValue}
-              loadMore={() => this._loadMore()}
-              hasMore={this._hasMore()}
-              useWindow={false}
-              children={this._renderItems()}
-              loader={
-                items.length > 0 && (
-                  <div className={css.nextPageLoaderWrapper}>
-                    <Loader size="small" dataHook={dataHooks.nextPageLoader} />
-                  </div>
-                )
-              }
-            />
-          )}
-
-          {shouldShowNoResultsFoundState && (
-            <div
-              data-hook={dataHooks.noResultsFoundState}
-              className={css.noResultsFoundStateWrapper}
-              children={noResultsFoundStateFactory(searchValue)}
-            />
-          )}
-        </div>
+        {shouldShowNoResultsFoundState && (
+          <div
+            data-hook={dataHooks.noResultsFoundState}
+            className={css.noResultsFoundStateWrapper}
+            children={noResultsFoundStateFactory(searchValue)}
+          />
+        )}
       </CustomModalLayout>
     );
   }
-
-  _calcHeights = () => {
-    const { maxHeight, height, withSearch, subtitle } = this.props;
-    const searchHeight = withSearch ? '78px' : '0px';
-    const headerHeight = subtitle ? '105px' : '81px';
-
-    return {
-      height:
-        'calc( calc( calc( ' +
-        height +
-        ' - ' +
-        searchHeight +
-        ' ) - ' +
-        headerHeight +
-        ' ) - ' +
-        '93px )',
-      maxHeight:
-        'calc( calc( calc( ' +
-        maxHeight +
-        ' - ' +
-        searchHeight +
-        ' ) - ' +
-        headerHeight +
-        ' ) - ' +
-        '93px )',
-    };
-  };
 
   _renderItems() {
     const { items, selectedItems } = this.state;

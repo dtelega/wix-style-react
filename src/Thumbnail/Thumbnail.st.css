@@ -24,7 +24,7 @@
 
 .thumbnail {
   -st-extends: Focusable;
-  -st-states: selected, disabled, size(enum(tiny, small, medium)), hasBackground, hasChildren;
+  -st-states: selected, disabled, size(enum(tiny, small, medium)), hasBackground, hasChildren, contentAlignment(enum(top, center));
   position: relative;
   display: flex;
   margin: 0 auto;
@@ -70,6 +70,10 @@
 
 .thumbnail:size(tiny) {
   padding: 15px;
+}
+
+.thumbnail:contentAlignment(top) {
+  justify-content: start;
 }
 
 .thumbnail:selected::after {

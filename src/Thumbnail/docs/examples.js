@@ -96,3 +96,28 @@ export const disabledWithImage = `
   </Cell>
 </Layout>
 `;
+
+export const withDifferentAlignments = `
+<Layout gap="12px">
+  <Cell span={12}>
+    <Thumbnail
+      title="Thumbnail Title"
+      description="Thumbnail with content aligned to center (default)"
+      image="https://static.wixstatic.com/media/c78d05b79ede429fb77c9d8ec4443b93.jpg/v1/fit/w_234,h_72/c78d05b79ede429fb77c9d8ec4443b93.jpg"
+      width={270}
+      height={250}
+      contentAlignment="center"
+    />
+  </Cell>
+  <Cell span={12}>
+    <Thumbnail
+      title="Thumbnail Title"
+      description="Thumbnail with content aligned to the top"
+      image="https://static.wixstatic.com/media/c78d05b79ede429fb77c9d8ec4443b93.jpg/v1/fit/w_234,h_72/c78d05b79ede429fb77c9d8ec4443b93.jpg"
+      width={270}
+      height={250}
+      contentAlignment="top"
+    />
+  </Cell>
+</Layout>;
+`;

@@ -1,17 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './MarketingPageLayout.st.css';
+import { st, classes } from './MarketingPageLayout.st.css';
 import { dataHooks } from './constants';
+
+import { Layout, Cell } from '../Layout';
 
 /** Marketing Page Layout */
 class MarketingPageLayout extends React.PureComponent {
   state = {};
 
   render() {
-    const { dataHook, className } = this.props;
+    const {
+      dataHook,
+      className,
+      size,
+      sidePadding,
+      verticalPadding,
+      content,
+      image,
+      footer,
+    } = this.props;
 
-    return <div {...styles('root', {}, className)} data-hook={dataHook}></div>;
+    return (
+      <div
+        data-hook={dataHook}
+        className={st(
+          classes.root,
+          { size, sidePadding, verticalPadding },
+          className,
+        )}
+      >
+        <Layout>
+          {content && (
+            <Cell span={6}>
+              <div className={classes.contentContainer}>{content}</div>
+            </Cell>
+          )}
+          {image && (
+            <Cell span={6}>
+              <div className={classes.imageContainer}>{image}</div>
+            </Cell>
+          )}
+          {footer && <Cell span={12}>{footer}</Cell>}
+        </Layout>
+      </div>
+    );
   }
 }
 
@@ -33,13 +67,20 @@ MarketingPageLayout.propTypes = {
   /** Determine if to add vertical padding to the page */
   verticalPadding: PropTypes.bool,
 
-  /** The page's content. Use: <MarketingPageLayoutContent/>*/
+  /** The page's content. Use: <MarketingPageLayoutContent/> */
   content: PropTypes.node,
+
+  /** The page's image */
+  image: PropTypes.node,
 
   /** The page's footer. Use <TestimonialList/> or <FeatureList/> */
   footer: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
-MarketingPageLayout.defaultProps = {};
+MarketingPageLayout.defaultProps = {
+  size: 'large',
+  sidePadding: true,
+  verticalPadding: true,
+};
 
 export default MarketingPageLayout;

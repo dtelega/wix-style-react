@@ -1,12 +1,8 @@
 export const basicExample = `
     <MarketingPageLayout
-      overline="overline"
-      header="Marketing Page Title"
-      subtitle="Subtitle text"
-      content={['First Feature', 'Second Feature', 'Third Feature']}
-      contentPrefixIcon={<Icons.Check />}
-      action={<Button>Main Action</Button>}
+      content={<div>Content</div>}
       image={<Image />}
+      footer={<div>Footer</div>}
     />
 `;
 
@@ -15,14 +11,16 @@ export const sizesExample = `
         <Cell>
           <MarketingPageLayout
             size='medium'
-            content={<div>content</div>}
+            content={<div>Content</div>}
             image={<Image />}
+            footer={<div>Footer</div>}
           />
         </Cell>
         <Cell>
           <MarketingPageLayout
-            content={<div>content</div>}
+            content={<div>Content</div>}
             image={<Image />}
+            footer={<div>Footer</div>}
           />
         </Cell>
     </Layout>

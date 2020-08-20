@@ -61,7 +61,7 @@ export default {
       // {
       //   label: 'Testimonials',
       //   value: (
-      //     <MarketingPageTestimonialsFooter
+      //     <TestimonialList
       //       testimonials={[
       //         {
       //           id: '0001',
@@ -88,7 +88,7 @@ export default {
       // {
       //   label: 'Features',
       //   value: (
-      //     <MarketingPageFeaturesFooter
+      //     <FeatureList
       //       features={[
       //         {
       //           id: '0001',
@@ -120,7 +120,6 @@ export default {
   sections: [
     header({
       sourceUrl: `https://github.com/wix/wix-style-react/tree/master/src/${MarketingPageLayout.displayName}/`,
-      component: <MarketingPageLayout buttonText="Click me!" />,
     }),
 
     tabs([

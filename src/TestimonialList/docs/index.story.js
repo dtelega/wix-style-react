@@ -58,7 +58,6 @@ export default {
   sections: [
     header({
       sourceUrl: `https://github.com/wix/wix-style-react/tree/master/src/${TestimonialList.displayName}/`,
-      component: <TestimonialList buttonText="Click me!" />,
     }),
 
     tabs([

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
-import styles from './ListItemAction.st.css';
+import { st, classes } from './ListItemAction.st.css';
 import Text from '../Text';
 
 /** ListItemAction */
@@ -60,7 +60,7 @@ class ListItemActionComponent extends React.PureComponent {
     const { title, size, ellipsis, tooltipModifiers } = this.props;
     return (
       <Text
-        className={styles.text}
+        className={classes.text}
         weight="normal"
         size={size}
         dataHook="list-item-action-title"
@@ -77,7 +77,7 @@ class ListItemActionComponent extends React.PureComponent {
     const { prefixIcon, size } = this.props;
     return React.cloneElement(prefixIcon, {
       size: size === 'medium' ? 24 : 18,
-      className: styles.prefixIcon,
+      className: classes.prefixIcon,
       'data-hook': 'list-item-action-prefix-icon',
     });
   };
@@ -103,11 +103,17 @@ class ListItemActionComponent extends React.PureComponent {
       onKeyDown,
       autoFocus,
       highlighted,
+      className,
+      ...others
     } = this.props;
+
+    // since we're spreading the "rest" props, we don't want to pass
+    const { selected, hovered, ellipsis, ...rest } = others;
 
     return (
       <Component
-        {...styles('root', { skin, disabled, highlighted }, this.props)}
+        {...rest}
+        className={st(classes.root, { skin, disabled, highlighted }, className)}
         data-skin={skin}
         data-disabled={disabled}
         tabIndex={tabIndex}
@@ -143,13 +149,14 @@ export const listItemActionBuilder = ({
   autoFocus,
   className,
   ellipsis,
+  ...rest
 }) => ({
   id,
   disabled,
   overrideStyle: true,
-  value: props => (
+  value: ({ hovered }) => (
     <ListItemAction
-      {...props}
+      {...rest}
       ellipsis={ellipsis}
       className={className}
       autoFocus={autoFocus}
@@ -161,7 +168,8 @@ export const listItemActionBuilder = ({
       prefixIcon={prefixIcon}
       skin={skin}
       size={size}
-      highlighted={props.hovered}
+      highlighted={hovered}
+      disabled={disabled}
     />
   ),
 });

@@ -30,3 +30,71 @@ class Example extends React.Component {
   }
 }
 `;
+
+const personalTrainers = [
+  'Christian Mills',
+  'Logan Chandler',
+  'Paul Simon',
+].map(
+  name =>
+    `listItemSelectBuilder({
+     checkbox: true,
+     id: '${name}',
+     title: '${name}',
+  }),`,
+);
+
+personalTrainers.unshift(`
+     listItemSectionBuilder({
+        title: 'Personal Trainers',
+      }),
+`);
+
+export const usingBuilders = `
+class BuildersExample extends React.Component {
+  state = { selectedOptions: ['Logan Chandler'] };
+
+  onSelect = optionId  =>
+    optionId &&
+        this.setState({ selectedOptions: [...this.state.selectedOptions, optionId] });
+
+  onDeselect = optionId =>
+    this.setState({
+      selectedOptions: this.state.selectedOptions.filter(
+        item => item !== optionId,
+      ),
+    });
+
+  render() {
+    const { selectedOptions } = this.state;
+    const optionsList = [
+       listItemSectionBuilder({
+        title: 'Personal Trainers',
+       }),
+        listItemSelectBuilder({
+            checkbox: true,
+            id: 'Logan Chandler',
+            title: 'Logan Chandler',
+        }),
+       { value: 'Paul Simon', id: 'Paul Simon' },
+       listItemSectionBuilder({
+        title: 'Nutritionists',
+       }),
+       listItemSelectBuilder({
+            checkbox: true,
+            id: 'Etta Wheeler',
+            title: 'Etta Wheeler',
+          }),
+        { value: 'Robert Ortega', id: 'Robert Ortega'}
+        ];
+    return (
+      <MultiSelectCheckbox
+        options={optionsList}
+        selectedOptions={selectedOptions}
+        onSelect={this.onSelect}
+        onDeselect={this.onDeselect}
+      />
+    );
+  }
+}
+`;

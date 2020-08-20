@@ -1,3 +1,6 @@
+import * as Themes from './Themes';
+
+export { Themes };
 export { default as PopoverMenu } from './PopoverMenu';
 export { default as AddItem } from './AddItem';
 export { default as AudioPlayer } from './AudioPlayer';
@@ -172,3 +175,8 @@ export { default as TagList } from './TagList';
 export { default as MarketingPageLayout } from './MarketingPageLayout';
 export { default as FileUpload } from './FileUpload';
 export { default as Animate } from './Animate';
+export { default as Dropzone } from './Dropzone';
+export { default as FacesRatingBar } from './FacesRatingBar';
+export { default as ThemeProvider } from './ThemeProvider';
+export { default as TableListItem } from './TableListItem';
+export { default as TestimonialList } from './TestimonialList';

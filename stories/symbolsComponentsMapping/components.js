@@ -65,6 +65,7 @@ export const selectionComponentsNames = {
   Thumbnail: 'Thumbnail',
   Slider: 'Slider',
   StarsRatingBar: 'StarsRatingBar',
+  FacesRatingBar: 'FacesRatingBar',
 };
 
 /**
@@ -173,4 +174,11 @@ export const contentWidgetsComponentsNames = {
   MarketingLayout: 'MarketingLayout',
   BarChart: 'BarChart',
   Timeline: 'Timeline',
+};
+
+/**
+ * Components Family IC
+ */
+export const internalComponentsNames = {
+  TagList: 'TagList',
 };

@@ -49,10 +49,12 @@ require('../src/DragAndDrop/docs/DragAndDrop');
 require('../src/Dropdown/docs/index.story');
 require('../src/DropdownBase/docs/index.story');
 require('../src/DropdownLayout/docs');
+require('../src/Dropzone/docs/index.story');
 require('../src/EditableSelector/docs/index.story');
 require('../src/EditableTitle/docs/index.story');
 require('../src/EmptyState/docs/index.story');
 require('../src/EndorseContentLayout/docs');
+require('../src/FacesRatingBar/docs/index.story');
 require('../src/FilePicker/docs/index.story');
 require('../src/FileUpload/docs/index.story');
 require('../src/FillButton/docs/index.story');
@@ -135,12 +137,15 @@ require('../src/Stepper/docs/index.story');
 require('../src/Swatches/docs/index.story');
 require('../src/Table/docs/index.story');
 require('../src/TableActionCell/docs/index.story');
-require('../src/TableToolbar/docs/ToolbarStory');
+require('../src/TableListItem/docs/index.story');
+require('../src/TableToolbar/docs/index.story');
 require('../src/Tabs/docs/index.story');
 require('../src/Tag/docs/index.story');
 require('../src/TagList/docs/index.story');
+require('../src/TestimonialList/docs/index.story');
 require('../src/Text/docs/index.story');
 require('../src/TextButton/docs/index.story');
+require('../src/ThemeProvider/docs/index.story');
 require('../src/Thumbnail/docs/index.story');
 require('../src/TimeInput/docs/index.story');
 require('../src/Timeline/docs/index.story');
@@ -163,6 +168,7 @@ require('../src/Typography/docs/cssClasses.story');
 require('./Colors/index.story');
 require('../src/Typography/docs/index.story'); // 1.2 Typography
 require('./Icons/index.story.js'); // 1.4 Icons
+require('./Spacing/index.story.js'); // 1.5 Spacing
 require('./ScrollBar'); // 1.8 ScrollBar
 
 // 2. Layout

@@ -7,7 +7,7 @@ import Duplicate from 'wix-ui-icons-common/Duplicate';
 import Print from 'wix-ui-icons-common/Print';
 
 import { storySettings } from './storySettings';
-import style from './TableActionCell.story.st.css';
+import { st, classes } from './TableActionCell.story.st.css';
 
 import TableActionCell from '..';
 
@@ -34,6 +34,9 @@ import OnlySecondaryExampleRaw from '!raw-loader!./examples/OnlySecondaryExample
 
 import OnlyVisibleSecondaryExample from './examples/OnlyVisibleSecondaryExample';
 import OnlyVisibleSecondaryExampleRaw from '!raw-loader!./examples/OnlyVisibleSecondaryExample';
+
+import PrimaryWithOnlyVisibleSecondaryExample from './examples/PrimaryWithOnlyVisibleSecondaryExample';
+import PrimaryWithOnlyVisibleSecondaryExampleRaw from '!raw-loader!./examples/PrimaryWithOnlyVisibleSecondaryExample';
 
 import PrimarySecondaryRTLExample from './examples/PrimarySecondaryRTLExample';
 import PrimarySecondaryRTLExampleRaw from '!raw-loader!./examples/PrimarySecondaryRTLExample';
@@ -84,8 +87,8 @@ const secondaryActionsOption = [
 ];
 
 const ExampleComponent = props => (
-  <div {...style('root', {}, props)}>
-    <tr className={style.exampleRow}>
+  <div className={st(classes.root, props.className)}>
+    <tr className={classes.exampleRow}>
       <TableActionCell {...props} />
     </tr>
   </div>
@@ -121,20 +124,20 @@ export default {
   },
 
   examples: (
-    <div {...style('root')}>
-      <div className={style.example}>
+    <div className={st(classes.root)}>
+      <div className={classes.example}>
         <CodeExample title="Blue primary action" code={PrimaryBlueExampleRaw}>
           <PrimaryBlueExample />
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample title="White primary action" code={PrimaryWhiteExampleRaw}>
           <PrimaryWhiteExample />
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Primary action and secondary actions"
           code={PrimarySecondaryExampleRaw}
@@ -143,7 +146,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Primary action and hidden secondary action"
           code={PrimarySecondaryHiddenExampleRaw}
@@ -152,7 +155,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="With custom PopoverMenu props"
           code={PopoverMenuPropsExampleRaw}
@@ -161,7 +164,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Always visible secondary actions"
           code={AlwaysVisibleSecondaryExampleRaw}
@@ -170,7 +173,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Only secondary actions"
           code={OnlySecondaryExampleRaw}
@@ -179,7 +182,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Only visible secondary actions"
           code={OnlyVisibleSecondaryExampleRaw}
@@ -188,7 +191,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Primary and secondary actions with RTL"
           code={PrimarySecondaryRTLExampleRaw}
@@ -197,7 +200,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Disabled secondary actions"
           code={DisabledSecondaryExampleRaw}
@@ -206,7 +209,7 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Disabled primary actions"
           code={DisabledPrimaryExampleRaw}
@@ -215,12 +218,21 @@ export default {
         </CodeExample>
       </div>
 
-      <div className={style.example}>
+      <div className={classes.example}>
         <CodeExample
           title="Secondary Actions with Divider"
           code={SecondaryWithDividerExampleRaw}
         >
           <SecondaryWithDividerExample />
+        </CodeExample>
+      </div>
+
+      <div className={classes.example}>
+        <CodeExample
+          title="Primary with only visible secondary actions"
+          code={PrimaryWithOnlyVisibleSecondaryExampleRaw}
+        >
+          <PrimaryWithOnlyVisibleSecondaryExample />
         </CodeExample>
       </div>
     </div>

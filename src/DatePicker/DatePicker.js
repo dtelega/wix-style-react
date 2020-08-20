@@ -10,7 +10,7 @@ import DateInput from './DateInput';
 import { PopoverCommonProps } from '../common/PropTypes/PopoverCommon';
 import deprecationLog from '../utils/deprecationLog';
 
-import styles from './DatePicker.st.css';
+import { classes } from './DatePicker.st.css';
 
 /**
  * DatePicker component
@@ -43,6 +43,7 @@ export default class DatePicker extends React.PureComponent {
       placement: 'top-start',
       zIndex: 1,
     },
+    firstDayOfWeek: 1,
   };
 
   constructor(props) {
@@ -102,13 +103,15 @@ export default class DatePicker extends React.PureComponent {
     const isChanged = !isSameDay(value, this.props.value);
 
     if (isChanged) {
+      const oldValue =
+        this.props.value || new Date(new Date().setHours(0, 0, 0, 0));
       const newValue = [
         [value.getFullYear(), setYear],
         [value.getMonth(), setMonth],
         [value.getDate(), setDate],
       ].reduce(
         (_value, [datePart, setter]) => setter(_value, datePart),
-        this.props.value || new Date(),
+        oldValue,
       );
 
       this.setState({ value: newValue }, () => this.props.onChange(newValue));
@@ -196,6 +199,7 @@ export default class DatePicker extends React.PureComponent {
       zIndex,
       dataHook,
       popoverProps,
+      firstDayOfWeek,
     } = this.props;
 
     const { isOpen, value } = this.state;
@@ -213,11 +217,12 @@ export default class DatePicker extends React.PureComponent {
       value,
       shouldCloseOnSelect,
       numOfMonths: twoMonths ? 2 : 1,
+      firstDayOfWeek,
     };
 
     return (
       <Popover
-        {...styles('root', {}, this.props)}
+        className={classes.root}
         dataHook={dataHook}
         onClickOutside={this.closeCalendar}
         appendTo="parent"
@@ -325,4 +330,7 @@ DatePicker.propTypes = {
   zIndex: PropTypes.number,
 
   popoverProps: PropTypes.shape(PopoverCommonProps),
+
+  /** First day of the week, allowing only from 0 to 6 (Sunday to Saturday) */
+  firstDayOfWeek: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
 };

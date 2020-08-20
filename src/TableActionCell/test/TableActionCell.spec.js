@@ -16,7 +16,12 @@ const primaryActionProps = (actionTrigger = () => {}, disabled = false) => ({
   },
 });
 
-const secondaryActionsProps = ({ actionTriggers, actionDataHooks } = {}) => {
+const secondaryActionsProps = ({
+  actionTriggers,
+  actionDataHooks,
+  numOfSecondaryActions = 4,
+  numOfVisibleSecondaryActions = 2,
+} = {}) => {
   const createAction = n => ({
     text: `Action ${n}`,
     dataHook: actionDataHooks && actionDataHooks[n],
@@ -25,10 +30,10 @@ const secondaryActionsProps = ({ actionTriggers, actionDataHooks } = {}) => {
   });
 
   return {
-    secondaryActions: Array(4)
-      .fill()
+    secondaryActions: Array(numOfSecondaryActions)
+      .fill(undefined)
       .map((val, idx) => createAction(idx)),
-    numOfVisibleSecondaryActions: 2,
+    numOfVisibleSecondaryActions,
   };
 };
 
@@ -42,6 +47,32 @@ describe('Table Action Cell', () => {
 
     it("should have a placeholder when there's only a primary action", async () => {
       const { driver } = render(<TableActionCell {...primaryActionProps()} />);
+      expect(await driver.primaryActionPlaceholderExists()).toBe(true);
+    });
+
+    it("should have a placeholder when there's only a primary action without secondaryActions and numOfVisibleSecondaryActions > 0", async () => {
+      const { driver } = render(
+        <TableActionCell
+          {...primaryActionProps()}
+          {...secondaryActionsProps({
+            numOfSecondaryActions: 0,
+            numOfVisibleSecondaryActions: 2,
+          })}
+        />,
+      );
+      expect(await driver.primaryActionPlaceholderExists()).toBe(true);
+    });
+
+    it("should have a placeholder when there's a primary action and only visible secondary actions", async () => {
+      const { driver } = render(
+        <TableActionCell
+          {...primaryActionProps()}
+          {...secondaryActionsProps({
+            numOfSecondaryActions: 2,
+            numOfVisibleSecondaryActions: 2,
+          })}
+        />,
+      );
       expect(await driver.primaryActionPlaceholderExists()).toBe(true);
     });
 
@@ -130,7 +161,7 @@ describe('Table Action Cell', () => {
 
     it('should trigger secondary action on click', async () => {
       const actionTriggers = Array(4)
-        .fill()
+        .fill(undefined)
         .map(() => jest.fn());
 
       const { driver } = render(
@@ -250,58 +281,79 @@ describe('Table Action Cell', () => {
           />,
         );
 
-        const isDisabled = await driver
-          .getVisibleActionButtonDriver(0)
-          .isButtonDisabled();
-        expect(isDisabled).toBe(true);
+        const firstVisibleActionButton = driver.getVisibleActionButtonDriver(0);
+        expect(await firstVisibleActionButton.isButtonDisabled()).toBe(true);
+
+        await firstVisibleActionButton.click();
+        expect(actionTrigger).not.toHaveBeenCalled();
       });
 
-      describe('when disabledTooltipText is supplied', () => {
-        it('should show correct tooltip text', async () => {
-          const actionTrigger = jest.fn();
-
-          const disabledAction = {
+      describe('when action is disabled', () => {
+        let disabledAction;
+        beforeEach(() => {
+          disabledAction = {
             text: `Disabled Action`,
             icon: <span>Icon</span>,
-            onClick: actionTrigger,
-            disabled: false,
-            disabledDescription: 'disabled item tooltip text',
+            onClick: () => void 0,
+            disabled: true,
           };
-
-          const { driver } = render(
-            <TableActionCell
-              {...primaryActionProps()}
-              secondaryActions={[disabledAction]}
-              numOfVisibleSecondaryActions={1}
-            />,
-          );
-
-          const tooltipDriver = await driver.getVisibleActionTooltipDriver(0);
-          expect(tooltipDriver.getTooltipText()).toEqual('Disabled Action');
         });
-      });
+        describe('when disabledDescription is supplied', () => {
+          it('should show the supplied description as tooltip', async () => {
+            disabledAction.disabledDescription = 'disabled item description';
 
-      describe('when disabledTooltipText is not supplied', () => {
-        it('should show correct tooltip text', async () => {
-          const actionTrigger = jest.fn();
+            const { driver } = render(
+              <TableActionCell
+                {...primaryActionProps()}
+                secondaryActions={[disabledAction]}
+                numOfVisibleSecondaryActions={1}
+              />,
+            );
 
-          const disabledAction = {
-            text: `Disabled Action`,
-            icon: <span>Icon</span>,
-            onClick: actionTrigger,
-            disabled: false,
-          };
+            const tooltipDriver = await driver.getVisibleActionTooltipDriver(0);
+            expect(tooltipDriver.getTooltipText()).toEqual(
+              'disabled item description',
+            );
+          });
 
-          const { driver } = render(
-            <TableActionCell
-              {...primaryActionProps()}
-              secondaryActions={[disabledAction]}
-              numOfVisibleSecondaryActions={1}
-            />,
-          );
+          describe('when overriding tooltip content with tooltipProps', () => {
+            it('should show the supplied content as tooltip', async () => {
+              disabledAction.disabledDescription = 'disabled item description';
+              disabledAction.tooltipProps = {
+                content: 'Some custom tooltip content',
+              };
 
-          const tooltipDriver = await driver.getVisibleActionTooltipDriver(0);
-          expect(tooltipDriver.getTooltipText()).toEqual('Disabled Action');
+              const { driver } = render(
+                <TableActionCell
+                  {...primaryActionProps()}
+                  secondaryActions={[disabledAction]}
+                  numOfVisibleSecondaryActions={1}
+                />,
+              );
+
+              const tooltipDriver = await driver.getVisibleActionTooltipDriver(
+                0,
+              );
+              expect(tooltipDriver.getTooltipText()).toEqual(
+                'Some custom tooltip content',
+              );
+            });
+          });
+        });
+
+        describe('when disabledDescription is not supplied', () => {
+          it('should show action text as tooltip', async () => {
+            const { driver } = render(
+              <TableActionCell
+                {...primaryActionProps()}
+                secondaryActions={[disabledAction]}
+                numOfVisibleSecondaryActions={1}
+              />,
+            );
+
+            const tooltipDriver = await driver.getVisibleActionTooltipDriver(0);
+            expect(tooltipDriver.getTooltipText()).toEqual('Disabled Action');
+          });
         });
       });
     });

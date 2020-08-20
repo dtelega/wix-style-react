@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import StatisticsItem from './StatisticsItem';
-import styles from './StatisticsWidget.st.css';
+import { classes } from './StatisticsWidget.st.css';
 
 class StatisticsWidget extends React.PureComponent {
   static displayName = 'StatisticsWidget';
@@ -10,6 +10,8 @@ class StatisticsWidget extends React.PureComponent {
   static propTypes = {
     /** Applied as data-hook HTML attribute that can be used to create driver in testing */
     dataHook: PropTypes.string,
+    /** Displayed value size (default: large) */
+    size: PropTypes.oneOf(['tiny', 'large']),
 
     /**
      * Array of statistic items
@@ -36,7 +38,10 @@ class StatisticsWidget extends React.PureComponent {
     ),
   };
 
-  _renderStat = (stat, key) => <StatisticsItem {...stat} key={key} />;
+  _renderStat = (stat, key) => {
+    const { size } = this.props;
+    return <StatisticsItem {...stat} key={key} size={size} />;
+  };
 
   render() {
     const { dataHook } = this.props;
@@ -53,7 +58,7 @@ class StatisticsWidget extends React.PureComponent {
     const firstFive = items.slice(0, 5);
 
     return (
-      <div className={styles.root} data-hook={dataHook}>
+      <div className={classes.root} data-hook={dataHook}>
         {firstFive.map(this._renderStat)}
       </div>
     );

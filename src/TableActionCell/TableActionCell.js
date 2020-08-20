@@ -8,7 +8,8 @@ import IconButton from '../IconButton';
 import Tooltip from '../Tooltip';
 import { dataHooks } from './constants';
 import HoverSlot from './HoverSlot';
-import style from './TableActionCell.st.css';
+import { classes } from './TableActionCell.st.css';
+import { TooltipCommonProps } from '../common/PropTypes/TooltipCommon';
 
 /* eslint-disable react/prop-types */
 function renderPrimaryAction({ text, skin, onClick, disabled }) {
@@ -32,7 +33,15 @@ function renderPrimaryAction({ text, skin, onClick, disabled }) {
 function renderVisibleActions(actions) {
   return actions.map(
     (
-      { text, icon, onClick, dataHook, disabled, disabledDescription },
+      {
+        text,
+        icon,
+        onClick,
+        dataHook,
+        disabled,
+        disabledDescription,
+        tooltipProps,
+      },
       index,
     ) => (
       <Tooltip
@@ -42,6 +51,7 @@ function renderVisibleActions(actions) {
         content={
           disabled && Boolean(disabledDescription) ? disabledDescription : text
         }
+        {...tooltipProps}
       >
         <IconButton
           skin="inverted"
@@ -116,7 +126,7 @@ const TableActionCell = props => {
   const hiddenActions = secondaryActions.slice(numOfVisibleSecondaryActions);
 
   return (
-    <span data-hook={dataHook} {...style('root', {}, props)}>
+    <span data-hook={dataHook} className={classes.root}>
       {primaryAction && (
         <HoverSlot
           display="onHover"
@@ -136,22 +146,24 @@ const TableActionCell = props => {
       )}
 
       {hiddenActions.length > 0 && (
-        <div onClick={e => e.stopPropagation()} className={style.popoverMenu}>
+        <div onClick={e => e.stopPropagation()} className={classes.popoverMenu}>
           <HoverSlot display="always">
             {renderHiddenActions(hiddenActions, popoverMenuProps)}
           </HoverSlot>
         </div>
       )}
 
-      {primaryAction && !(secondaryActions || []).length && (
-        <HoverSlot
-          display="notOnHover"
-          className={style.placeholderIcon}
-          data-hook={dataHooks.tableActionCellPlaceholder}
-        >
-          {renderPlaceholder()}
-        </HoverSlot>
-      )}
+      {primaryAction &&
+        (!secondaryActions.length ||
+          secondaryActions.length === numOfVisibleSecondaryActions) && (
+          <HoverSlot
+            display="notOnHover"
+            className={classes.placeholderIcon}
+            data-hook={dataHooks.tableActionCellPlaceholder}
+          >
+            {renderPlaceholder()}
+          </HoverSlot>
+        )}
     </span>
   );
 };
@@ -183,6 +195,7 @@ TableActionCell.propTypes = {
    * `disabled` is an optional prop for the secondary action to be disabled
    * `dataHook` is an optional prop for accessing the action in tests
    * 'disabledDescription' is an optional prop that indicates what string to display in tooltip when action is visible and disabled (if none is provided, the text prop is used. if empty string is provided, no tooltip will be displayed)
+   * 'tooltipProps' is an optional prop for controlling the tooltip shown when the action is visible
    * 'divider' is an optional prop to display a divider between the action items
    */
   secondaryActions: PropTypes.arrayOf(
@@ -193,6 +206,7 @@ TableActionCell.propTypes = {
       disabled: PropTypes.bool,
       dataHook: PropTypes.string,
       disabledDescription: PropTypes.string,
+      tooltipProps: PropTypes.shape(TooltipCommonProps),
       divider: PropTypes.bool,
     }),
   ),

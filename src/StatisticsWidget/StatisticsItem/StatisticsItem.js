@@ -12,10 +12,19 @@ import AdaptiveHeading from '../../utils/AdaptiveHeading';
 import DataHooks from '../dataHooks';
 import DataAttrs from '../dataAttrs';
 
-import styles from './StatisticsItem.st.css';
+import { st, classes } from './StatisticsItem.st.css';
+import { SIZES } from '../constants';
+
+const sizeToAppearance = {
+  [SIZES.tiny]: 'tiny',
+  [SIZES.large]: 'H1',
+};
 
 class StatisticsItem extends React.PureComponent {
   static displayName = 'StatisticsItem';
+  static defaultProps = {
+    size: 'large',
+  };
 
   _getFocusableProps = () => {
     const { onClick, focusableOnFocus, focusableOnBlur } = this.props;
@@ -40,9 +49,10 @@ class StatisticsItem extends React.PureComponent {
     }
   };
 
-  _renderValue = (value, valueInShort) => (
+  _renderValue = (value, valueInShort, size) => (
     <AdaptiveHeading
       text={value}
+      appearance={sizeToAppearance[size]}
       textInShort={valueInShort}
       dataHook={DataHooks.value}
     />
@@ -54,19 +64,19 @@ class StatisticsItem extends React.PureComponent {
     }
 
     return (
-      <div className={styles.description}>
+      <div className={classes.description}>
         <Heading ellipsis dataHook={DataHooks.description} appearance="H5">
           {description}
         </Heading>
         {subtitleContentInfo && (
           <Tooltip
             textAlign="start"
-            {...styles('tooltip', {}, this.props)}
+            className={classes.tooltip}
             dataHook={DataHooks.tooltip}
             content={subtitleContentInfo}
           >
             <InfoCircleSmall
-              className={styles.info}
+              className={classes.info}
               data-hook={DataHooks.info}
             />
           </Tooltip>
@@ -101,12 +111,12 @@ class StatisticsItem extends React.PureComponent {
     return (
       <Badge
         {...badgeProps}
-        {...styles('percentage ', { clickable: !!this.props.onClick })}
+        className={st(classes.percentage, { clickable: !!this.props.onClick })}
       >
-        <div className={styles.percentageInner}>
+        <div className={classes.percentageInner}>
           {!!percentage && (
             <span
-              className={styles.trendIndicator}
+              className={classes.trendIndicator}
               data-hook={DataHooks.trendIndicator}
             >
               {trendIcon}
@@ -131,21 +141,26 @@ class StatisticsItem extends React.PureComponent {
       focusableOnFocus,
       focusableOnBlur,
       className,
+      size,
       ...rest
     } = this.props;
 
     const attrs = {
       ...this._getFocusableProps(),
-      ...styles('item', { clickable: !!onClick }, this.props),
       'data-hook': DataHooks.stat,
       onKeyDown: onClick ? this._getSpaceOrEnterHandler(onClick) : undefined,
       onClick,
       ...rest,
+      className: st(
+        classes.item,
+        { clickable: !!onClick, size },
+        this.props.className,
+      ),
     };
 
     return (
       <div {...attrs}>
-        {this._renderValue(value, valueInShort)}
+        {this._renderValue(value, valueInShort, size)}
         {this._renderDescription(description, descriptionInfo)}
         {this._renderPercents(percentage, invertedPercentage)}
         {children}

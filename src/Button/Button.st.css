@@ -1,12 +1,14 @@
 :import {
-  -st-from: 'wix-ui-core/index.st.css';
-  -st-named: ButtonNext;
+  -st-from: 'wix-ui-core/dist/src/components/button-next/button-next.st.css';
+  -st-default: ButtonNext;
 }
 
 :import {
   -st-from: '../Foundation/stylable/colors.st.css';
   -st-named: B10, F00, B20,  R10, R20, P10, P20, G10, G20, D80, B50, D40,
-  D10, D20, B40, F00, D10-20, D20-48, D20-54, D20-60, D80-30, D80-70, D10-30;
+  D10, D20, B40, F00, D10-20, D20-48, D20-54, D20-60, D80-30, D80-70, D10-30,
+  THEME-TEXT-COLOR-PRIMARY-LIGHT,
+   THEME-COLOR-10,  THEME-COLOR-20;
 }
 
 :import {
@@ -37,9 +39,9 @@
   border-radius: 18px;
   padding: 0 23px;
 
-  background-color: value(B10);
-  border-color: value(B10);
-  color: value(D80);
+  background-color: value(THEME-COLOR-10);
+  border-color: value(THEME-COLOR-10);
+  color: value(THEME-TEXT-COLOR-PRIMARY-LIGHT);
 
   /* render as anchor overrides */
   text-decoration: none;
@@ -52,19 +54,19 @@
 }
 
 .root:hover {
-  background-color: value(B20);
-  border-color: value(B20);
-  color: value(D80);
+  background-color: value(THEME-COLOR-20);
+  border-color: value(THEME-COLOR-20);
+  color: value(THEME-TEXT-COLOR-PRIMARY-LIGHT);
 }
 
 .root:active {
-  background-color: value(B10);
-  border-color: value(B10);
-  color: value(D80);
+  background-color: value(THEME-COLOR-10);
+  border-color: value(THEME-COLOR-10);
+  color: value(THEME-TEXT-COLOR-PRIMARY-LIGHT);
 }
 
 .root:disabled {
-  color: value(D80);
+  color: value(THEME-TEXT-COLOR-PRIMARY-LIGHT);
   background-color: value(D10-30);
   border-color: transparent;
 }
@@ -79,19 +81,19 @@
 
 .root:priority(secondary) {
   background-color: transparent;
-  border-color: value(B10);
-  color: value(B10);
+  border-color: value(THEME-COLOR-10);
+  color: value(THEME-COLOR-10);
 }
 
 .root:priority(secondary):hover {
   color: value(D80);
   border-color: transparent;
-  background-color: value(B20);
+  background-color: value(THEME-COLOR-20);
 }
 
 .root:priority(secondary):active {
-  background-color: value(B10);
-  border-color: value(B10);
+  background-color: value(THEME-COLOR-10);
+  border-color: value(THEME-COLOR-10);
   color: value(D80);
 }
 

@@ -131,6 +131,9 @@
       "docs/index.story.js"
     ]
   },
+  "Dropzone": {
+    "path": "src/Dropzone"
+  },
   "EditableSelector": {
     "path": "src/EditableSelector"
   },
@@ -145,6 +148,9 @@
     "missingFiles": [
       "docs/index.story.js"
     ]
+  },
+  "FacesRatingBar": {
+    "path": "src/FacesRatingBar"
   },
   "FilePicker": {
     "path": "src/FilePicker"
@@ -404,11 +410,11 @@
   "TableActionCell": {
     "path": "src/TableActionCell"
   },
+  "TableListItem": {
+    "path": "src/TableListItem"
+  },
   "TableToolbar": {
-    "path": "src/TableToolbar",
-    "missingFiles": [
-      "docs/index.story.js"
-    ]
+    "path": "src/TableToolbar"
   },
   "Tabs": {
     "path": "src/Tabs"
@@ -419,11 +425,17 @@
   "TagList": {
     "path": "src/TagList"
   },
+  "TestimonialList": {
+    "path": "src/TestimonialList"
+  },
   "Text": {
     "path": "src/Text"
   },
   "TextButton": {
     "path": "src/TextButton"
+  },
+  "ThemeProvider": {
+    "path": "src/ThemeProvider"
   },
   "Thumbnail": {
     "path": "src/Thumbnail"

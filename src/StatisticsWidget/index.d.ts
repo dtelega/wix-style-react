@@ -2,6 +2,7 @@ import * as React from 'react';
 
 export interface StatisticsWidgetProps {
   dataHook?: string;
+  size?: 'large' | 'tiny';
   items?: StatisticsWidgetItem[];
 }
 
@@ -19,4 +20,5 @@ export type StatisticsWidgetItem = {
   onClick?: (
     event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
   ) => void;
+  children?: React.ReactNode;
 };

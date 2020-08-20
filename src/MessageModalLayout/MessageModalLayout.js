@@ -1,19 +1,18 @@
 import React, { useState, useCallback } from 'react';
-import styles from './MessageModalLayout.st.css';
+import { st, classes } from './MessageModalLayout.st.css';
 
 import BaseModalLayout from '../BaseModalLayout';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
 /** MessageModalLayout */
-const MessageModalLayout = ({ children, ...restProps }) => {
+const MessageModalLayout = ({ children, className, ...restProps }) => {
   const { illustration } = restProps;
   const [showFooterDivider, setShowFooterDivider] = useState(false);
 
-  const onContentScrollPositionChanged = useCallback(({ position }) => {
-    const { y: scrollPosition } = position;
-    const newShowDivider =
-      scrollPosition === 'top' || scrollPosition === 'middle';
+  const onContentScrollAreaChanged = useCallback(({ area }) => {
+    const { y: scrollArea } = area;
+    const newShowDivider = scrollArea === 'top' || scrollArea === 'middle';
     setShowFooterDivider(newShowDivider);
   }, []);
 
@@ -21,18 +20,19 @@ const MessageModalLayout = ({ children, ...restProps }) => {
 
   return (
     <BaseModalLayout
-      {...styles('root', { hasIllustration }, restProps)}
       {...restProps}
+      className={st(classes.root, { hasIllustration }, className)}
     >
-      <div className={styles.topAreaContainer}>
+      <div className={classes.topAreaContainer}>
         <BaseModalLayout.Illustration />
-        <div className={styles.contentAreaContainer}>
+        <div className={classes.contentAreaContainer}>
           <BaseModalLayout.Header />
           <BaseModalLayout.Content
             contentHideDividers={hasIllustration}
-            onContentScrollPositionChanged={
-              (hasIllustration && onContentScrollPositionChanged) || null
-            }
+            scrollProps={{
+              onScrollAreaChanged:
+                (hasIllustration && onContentScrollAreaChanged) || null,
+            }}
           >
             {children}
           </BaseModalLayout.Content>

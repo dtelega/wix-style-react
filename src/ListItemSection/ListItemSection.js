@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './ListItemSection.st.css';
+import { st, classes } from './ListItemSection.st.css';
 import Divider from '../Divider';
 import Text from '../Text';
 import TextButton from '../TextButton';
@@ -69,7 +69,7 @@ class ListItemSection extends React.PureComponent {
     const { dataHook, type } = this.props;
     return (
       <div
-        {...styles(styles.root, { [type]: true })}
+        className={st(classes.root, { [type]: true })}
         data-hook={dataHook}
         onClick={e => e.stopPropagation()}
         children={children}
@@ -87,10 +87,11 @@ class ListItemSection extends React.PureComponent {
       ellipsis,
       onClick,
     } = this.props;
+
     return (
       <div
-        {...styles(
-          styles.root,
+        className={st(
+          classes.root,
           { subheader: type === TYPES.SUBHEADER },
           className,
         )}
@@ -101,7 +102,7 @@ class ListItemSection extends React.PureComponent {
           dataHook={dataHooks.TITLE}
           tagName="div"
           size="small"
-          className={styles.title}
+          className={classes.title}
           ellipsis={ellipsis}
           showDelay={300}
         >
@@ -112,7 +113,7 @@ class ListItemSection extends React.PureComponent {
         {suffix && (
           <TextButton
             onClick={onClick}
-            {...styles(styles.suffix, { ellipsis })}
+            className={st(classes.suffix, { ellipsis })}
             dataHook={dataHooks.SUFFIX}
             size="tiny"
           >
@@ -129,6 +130,7 @@ export default ListItemSection;
 export const listItemSectionBuilder = ({
   id,
   className,
+  dataHook,
   type,
   title,
   suffix,
@@ -136,9 +138,11 @@ export const listItemSectionBuilder = ({
 }) => ({
   id,
   overrideStyle: true,
+  disabled: true,
   value: props => (
     <ListItemSection
       className={className}
+      dataHook={dataHook}
       type={type}
       title={title}
       suffix={suffix}

@@ -1,8 +1,7 @@
-import styles from './Calendar.st.css';
+import { st, classes } from './Calendar.st.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import DayPicker from 'react-day-picker';
-import classNames from 'classnames';
 import { addMonths, subMonths, startOfMonth, isSameDay } from 'date-fns';
 import { CalendarView } from './utils';
 import localeUtilsFactory from '../LocaleUtils';
@@ -24,6 +23,7 @@ export default class Calendar extends React.PureComponent {
     showMonthDropdown: false,
     showYearDropdown: false,
     numOfMonths: 1,
+    firstDayOfWeek: 1,
   };
 
   constructor(props) {
@@ -71,7 +71,7 @@ export default class Calendar extends React.PureComponent {
       if (modifier in modifiers) {
         return (
           <div
-            className={styles.dayCircle}
+            className={classes.dayCircle}
             data-date={`${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`}
           >
             {day.getDate()}
@@ -242,7 +242,13 @@ export default class Calendar extends React.PureComponent {
   };
 
   _createDayPickerProps = () => {
-    const { locale, filterDate, excludePastDates, numOfMonths } = this.props;
+    const {
+      locale,
+      filterDate,
+      excludePastDates,
+      numOfMonths,
+      firstDayOfWeek,
+    } = this.props;
 
     const value = Calendar.parseValue(this.props.value);
 
@@ -272,7 +278,7 @@ export default class Calendar extends React.PureComponent {
       selectedDays,
       month,
       year: month,
-      firstDayOfWeek: 1,
+      firstDayOfWeek,
       locale: typeof locale === 'string' ? locale : '',
       fixedWeeks: true,
       onKeyDown: this._handleKeyDown,
@@ -283,7 +289,7 @@ export default class Calendar extends React.PureComponent {
       onCaptionClick: this._preventActionEventDefault,
       onDayKeyDown: this._handleDayKeyDown,
       numberOfMonths: numOfMonths,
-      className: numOfMonths > 1 ? styles.TwoMonths : '',
+      className: numOfMonths > 1 ? classes.TwoMonths : '',
       modifiers: { start: from, end: to, firstOfMonth, lastOfMonth, singleDay },
       renderDay: Calendar.renderDay,
     };
@@ -343,7 +349,7 @@ export default class Calendar extends React.PureComponent {
     return (
       <div
         data-hook={dataHook}
-        className={classNames(styles.calendar, className)}
+        className={st(classes.calendar, className)}
         onClick={this._preventActionEventDefault}
       >
         <DayPicker
@@ -364,6 +370,9 @@ Calendar.propTypes = {
 
   /** Display multiple months, currently allowing only 1 or 2 */
   numOfMonths: PropTypes.oneOf([1, 2]),
+
+  /** First day of the week, allowing only from 0 to 6 (Sunday to Saturday) */
+  firstDayOfWeek: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
 
   /** A single CSS class name to be appended to the root element. */
   className: PropTypes.string,

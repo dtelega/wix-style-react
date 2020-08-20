@@ -19,10 +19,29 @@ import StructureExampleRaw from '!raw-loader!./examples/Structure';
 import SizesExampleRaw from '!raw-loader!./examples/Sizes';
 import CustomizingTagsExampleRaw from '!raw-loader!./examples/CustomizingTags';
 import UsageExampleRaw from '!raw-loader!./examples/Usage';
+import CollapsableExampleRaw from '!raw-loader!./examples/Collapsable';
 
 import TagList from '..';
 
 const example = config => baseExample({ components: allComponents, ...config });
+
+const exampleTags = [
+  {
+    label: 'Two Tags',
+    value: [
+      { id: '1', children: 'In Progress' },
+      { id: '2', children: 'Canceled By Client' },
+    ],
+  },
+  {
+    label: 'Three Tags',
+    value: [
+      { id: '1', children: 'In Progress' },
+      { id: '2', children: 'Canceled By Client' },
+      { id: '3', children: 'Last  7 Days' },
+    ],
+  },
+];
 
 export default {
   category: storySettings.category,
@@ -30,6 +49,18 @@ export default {
 
   component: TagList,
   componentPath: '..',
+
+  componentProps: {
+    tags: exampleTags[0].value,
+    size: 'small',
+  },
+
+  exampleProps: {
+    tags: exampleTags,
+    actionButton: [{ label: 'Button' }],
+  },
+
+  exampleImport: `import { TagList } from 'wix-style-react';`,
 
   sections: [
     header({
@@ -83,6 +114,13 @@ export default {
             title: 'Customizing Tags',
             text: `Component allows to pass all <Tag/> properties except size.`,
             source: CustomizingTagsExampleRaw,
+          }),
+
+          example({
+            title: 'Expandable',
+            text:
+              'Component allows to pass the maxVisibleTags prop to limit the number of tags shown (default: 3).',
+            source: CollapsableExampleRaw,
           }),
 
           example({

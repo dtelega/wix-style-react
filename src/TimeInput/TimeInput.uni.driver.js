@@ -1,4 +1,4 @@
-import { baseUniDriverFactory } from '../../test/utils/unidriver';
+import { baseUniDriverFactory } from 'wix-ui-test-utils/base-driver';
 import { testkit } from '../Input/Input.uni.driver';
 import { tickerDriverFactory } from '../Input/Ticker/Ticker.uni.driver';
 import { dataHooks } from './constants';
@@ -23,5 +23,7 @@ export const timeInputUniDriverFactory = (base, body) => {
     isRtl: async () => input.isRTL(),
     setValue: async value => input.enterText(value),
     blur: async () => input.blur(),
+    hasStatus: status => input.hasStatus(status),
+    getStatusMessage: () => input.getStatusMessage(),
   };
 };

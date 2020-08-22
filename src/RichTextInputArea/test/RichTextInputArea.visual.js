@@ -107,7 +107,7 @@ const tests = [
     ],
   },
   {
-    describe: 'Min height',
+    describe: 'Max height',
     its: [
       {
         it: 'Default',
@@ -120,7 +120,7 @@ const tests = [
     ],
   },
   {
-    describe: 'Max height',
+    describe: 'Min height',
     its: [
       {
         it: 'Default',

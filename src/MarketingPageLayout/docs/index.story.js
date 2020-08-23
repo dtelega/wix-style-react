@@ -132,7 +132,9 @@ export default {
               'This component helps you to organize all the data of a marketing page. The marketing page includes the following sections: a content, an image and a footer.',
           }),
 
-          importExample(),
+          importExample(
+            "import { MarketingPageLayout } from 'wix-style-react';",
+          ),
 
           divider(),
 

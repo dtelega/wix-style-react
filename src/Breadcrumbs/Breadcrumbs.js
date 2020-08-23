@@ -58,7 +58,6 @@ class Breadcrumbs extends React.PureComponent {
         <FontUpgradeContext.Consumer>
           {context => (
             <Text
-              className={classes.itemText}
               dataHook={DATA_HOOKS.BREADCRUMBS_ITEM}
               weight={isActive ? 'normal' : 'thin'}
               light={theme === THEMES.onDarkBackground}

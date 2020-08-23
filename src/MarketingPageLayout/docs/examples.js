@@ -6,31 +6,28 @@ export const basicExample = `
     />
 `;
 
-export const sizesExample = `
-    <Layout>
-        <Cell>
-          <MarketingPageLayout
-            size='medium'
-            content={<div>Content</div>}
-            image={<Image />}
-            footer={<div>Footer</div>}
-          />
-        </Cell>
-        <Cell>
-          <MarketingPageLayout
-            content={<div>Content</div>}
-            image={<Image />}
-            footer={<div>Footer</div>}
-          />
-        </Cell>
-    </Layout>
+export const mediumSizeExample = `
+  <MarketingPageLayout
+    size='medium'
+    content={<div>Medium Size Content</div>}
+    image={<Image />}
+    footer={<div>Footer</div>}
+  />
 `;
 
-export const featuresFooterExample = `
+export const largeSizeExample = `
+  <MarketingPageLayout
+    content={<div>Large Size Content</div>}
+    image={<Image />}
+    footer={<div>Footer</div>}
+  />
+`;
+
+export const featureListExample = `
     <MarketingPageLayout
       content={<div>content</div>}
       image={<Image />}
-      // footer={<MarketingPageFeaturesFooter
+      // footer={<FeatureList
       //     features={[
       //       {
       //         id: '0001',
@@ -55,31 +52,31 @@ export const featuresFooterExample = `
     />
 `;
 
-export const testimonialsFooterExample = `
+export const testimonialListExample = `
     <MarketingPageLayout
       content={<div>content</div>}
       image={<Image />}
-      // footer={<MarketingPageTestimonialsFooter
-      //     testimonials={[
-      //       {
-      //         id: '0001',
-      //         avatar: <Avatar name="Guy in glasses" size="size60"/>,
-      //         text: 'I love it! This product is exactly what I needed.',
-      //         authorName: 'Guy in glasses'
-      //       },
-      //       {
-      //         id: '0002',
-      //         avatar: <Avatar name="Person with a hat" size="size60"/>,
-      //         text: 'Amazing! It helped me to solve my problems.',
-      //         authorName: 'Person with a hat'
-      //       },
-      //       {
-      //         id: '0003',
-      //         avatar: <Avatar name="Smiling lady" size="size60"/>,
-      //         text: 'A perfect tool for my every day tasks.',
-      //         authorName: 'Smiling lady'
-      //       },
-      //     ]}
-      //   />}
+      footer={<TestimonialList
+          testimonials={[
+            {
+              id: '0001',
+              avatar: <Avatar name="Guy in glasses" size="size60"/>,
+              text: 'I love it! This product is exactly what I needed.',
+              authorName: 'Guy in glasses'
+            },
+            {
+              id: '0002',
+              avatar: <Avatar name="Person with a hat" size="size60"/>,
+              text: 'Amazing! It helped me to solve my problems.',
+              authorName: 'Person with a hat'
+            },
+            {
+              id: '0003',
+              avatar: <Avatar name="Smiling lady" size="size60"/>,
+              text: 'A perfect tool for my every day tasks.',
+              authorName: 'Smiling lady'
+            },
+          ]}
+        />}
     />
 `;

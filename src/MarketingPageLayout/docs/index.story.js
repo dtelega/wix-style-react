@@ -138,28 +138,52 @@ export default {
 
           title('Examples'),
 
-          example({
-            title: 'Simple Usage',
-            text: 'A simple example with compact preview',
+          description({
+            title: 'Structure',
+            text:
+              'Component includes the following sections: a content, an image and a footer. ',
+          }),
+
+          code({
+            compact: true,
             source: examples.basicExample,
           }),
 
-          example({
+          description({
             title: 'Sizes',
             text: 'There are 2 sizes: medium and large (default)',
-            source: examples.sizesExample,
           }),
 
-          example({
-            title: 'With features footer',
-            text: 'This is one of the footer component you can use',
-            source: examples.featuresFooterExample,
+          code({
+            compact: true,
+            source: examples.mediumSizeExample,
           }),
 
-          example({
-            title: 'With testimonials footer',
-            text: 'This is one of the footer component you can use',
-            source: examples.testimonialsFooterExample,
+          code({
+            compact: true,
+            source: examples.largeSizeExample,
+          }),
+
+          description({
+            title: 'FeatureList Footer',
+            text:
+              'There two footers components that can be used. This is an example of MarketingPageLayout with FeatureList footer.',
+          }),
+
+          code({
+            compact: true,
+            source: examples.featureListExample,
+          }),
+
+          description({
+            title: 'TestimonialList Footer',
+            text:
+              'There two footers components that can be used. This is an example of MarketingPageLayout with TestimonialList footer.',
+          }),
+
+          code({
+            compact: true,
+            source: examples.testimonialListExample,
           }),
         ],
       }),

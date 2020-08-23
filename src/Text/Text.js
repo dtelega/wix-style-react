@@ -3,19 +3,15 @@ import RawText from './RawText';
 import { st, classes } from './Text.st.css';
 import Ellipsis, { extractEllipsisProps } from '../common/Ellipsis';
 
-const TextWithEllipsis = ({ className, wrapperClassName, ...props }) => {
+const TextWithEllipsis = ({ className, ...props }) => {
   const { ellipsisProps, componentProps } = extractEllipsisProps(props);
   return (
     <Ellipsis
       {...ellipsisProps}
-      wrapperClassName={st(
-        classes.root,
-        {
-          size: props.size,
-          weight: props.weight,
-        },
-        wrapperClassName,
-      )}
+      wrapperClassName={st(classes.root, {
+        size: props.size,
+        weight: props.weight,
+      })}
       render={({ ref, ellipsisClasses }) => (
         <RawText
           {...componentProps}

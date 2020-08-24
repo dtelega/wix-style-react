@@ -4,7 +4,7 @@ import values from '../../utils/operators/values';
 const arbitraryEmptyElement = () => document.createElement('div');
 
 const dataTableDriverFactory = ({ element }) => {
-  // Node is a DOM API. Therefore, does not exist in jsdom. Using a constant instead: https://developer.mozilla.org/en-US/docs/Web/API/Node
+  // Node is a DOM API which does not exist in jsdom. Using a constant instead: https://developer.mozilla.org/en-US/docs/Web/API/Node
   const COMMENT_NODE = 8;
   // When a React component renders null in React 15, a Comment-Element is rendered to the DOM.
   const isDisplayingNothing = !element || element.nodeType === COMMENT_NODE;

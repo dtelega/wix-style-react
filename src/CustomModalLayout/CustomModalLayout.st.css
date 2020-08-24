@@ -38,6 +38,10 @@
   justify-content: flex-start;
 }
 
+.root::content::innerContent {
+  flex: 1;
+}
+
 .root::content {
-  flex: 1 1 auto;
+  flex: 1;
 }

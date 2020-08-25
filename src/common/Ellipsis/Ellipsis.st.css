@@ -15,20 +15,11 @@
 
 .maxLines {
   display: -webkit-box !important;
+  display: -moz-box !important;
   -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
 }
 
-@supports not( display: -webkit-box){
-  .maxLines {
-    display: -moz-box !important;
-    -moz-box-orient: vertical;
-  }
-}
-
-/* TODO: for IE browser*/
-@supports not( display: -moz-box){
-
-}
 
 /* Tooltip */
 .tooltip {

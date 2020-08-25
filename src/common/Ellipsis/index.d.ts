@@ -6,6 +6,7 @@ type EllipsisCommonProps = {
   ellipsis?: boolean;
   showTooltip?: boolean;
   wrapperClassName?: string;
+  lineClamp?: number;
 };
 
 // Ellipsis
@@ -14,6 +15,7 @@ export type EllipsisProps = EllipsisCommonProps & TooltipCommonProps;
 type RenderProps<T> = {
   ref: any; // TODO - React.RefObject<T>,
   ellipsisClasses: (className?: string) => string;
+  style?: object;
 };
 
 interface IEllipsisProps extends EllipsisProps {

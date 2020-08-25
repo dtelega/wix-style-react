@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormFieldSpinnerUp from 'wix-ui-icons-common/system/FormFieldSpinnerUp';
 import FormFieldSpinnerDown from 'wix-ui-icons-common/system/FormFieldSpinnerDown';
-import styles from './Ticker.st.css';
+import { st, classes } from './Ticker.st.css';
 import InputConsumer from '../InputConsumer';
 import { dataHooks } from './constants';
 
@@ -12,11 +12,14 @@ const Ticker = ({ onUp, onDown, upDisabled, downDisabled, dataHook }) => (
       const isUpDisabled = upDisabled || disabled || readOnly;
       const isDownDisabled = downDisabled || disabled || readOnly;
       return (
-        <div {...styles('root', { size, roundInput })} data-hook={dataHook}>
+        <div
+          className={st(classes.root, { size, roundInput })}
+          data-hook={dataHook}
+        >
           <div
             data-hook={dataHooks.tickerUp}
             data-disabled={isUpDisabled}
-            {...styles('up', { disabled: isUpDisabled })}
+            className={st(classes.up, { disabled: isUpDisabled })}
             onClick={isUpDisabled ? null : onUp}
           >
             <FormFieldSpinnerUp />
@@ -24,7 +27,7 @@ const Ticker = ({ onUp, onDown, upDisabled, downDisabled, dataHook }) => (
           <div
             data-hook={dataHooks.tickerDown}
             data-disabled={isDownDisabled}
-            {...styles('up', { disabled: isDownDisabled })}
+            className={st(classes.down, { disabled: isDownDisabled })}
             onClick={isDownDisabled ? null : onDown}
           >
             <FormFieldSpinnerDown />

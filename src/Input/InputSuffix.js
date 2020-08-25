@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DropDownArrow from 'wix-ui-icons-common/system/DropDownArrow';
 import CloseButton from '../CloseButton';
 import StatusIndicator from '../StatusIndicator';
-import classes from './Input.st.css';
+import { classes } from './Input.st.css';
 import Box from '../Box';
 import { dataHooks } from './constants';
 

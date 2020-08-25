@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputConsumer from '../InputConsumer';
-import classes from './IconAffix.st.css';
+import { st, classes } from './IconAffix.st.css';
 
 const IconAffix = ({ children, dataHook }) => (
   <InputConsumer consumerCompName={IconAffix.displayName}>
     {({ size, inPrefix, inSuffix, roundInput, disabled, onInputClicked }) => (
       <div
-        {...classes('root', { size, inPrefix, inSuffix, roundInput, disabled })}
+        className={st(classes.root, {
+          size,
+          inPrefix,
+          inSuffix,
+          roundInput,
+          disabled,
+        })}
         onClick={!disabled ? onInputClicked : undefined}
         data-hook={dataHook}
       >

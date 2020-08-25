@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from './Input';
-import classes from './Input.st.css';
+import { st, classes } from './Input.st.css';
 import DATA_ATTR from './DataAttr';
 
 class ThemedInput extends Input {
@@ -50,8 +50,8 @@ class ThemedInput extends Input {
     const placeholder = this.props.placeholder;
     return (
       <div
-        {...classes(
-          'root',
+        className={st(
+          classes.root,
           {
             size,
             hasFocus: forceFocus || this.state.focus,
@@ -63,7 +63,7 @@ class ThemedInput extends Input {
             noRightBorderRadius,
             noLeftBorderRadius,
           },
-          { className },
+          className,
         )}
         dir={rtl ? 'rtl' : null}
         data-hook={dataHook}

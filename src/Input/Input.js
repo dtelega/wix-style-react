@@ -8,7 +8,7 @@ import Group from './Group';
 import InputSuffix, { getVisibleSuffixCount } from './InputSuffix';
 import deprecationLog from '../utils/deprecationLog';
 
-import classes from './Input.st.css';
+import { classes } from './Input.st.css';
 import { InputContext } from './InputContext';
 import { SIZES } from './constants';
 import Box from '../Box';

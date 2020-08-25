@@ -8,7 +8,7 @@ function EllipsisWithMandatoryProps() {
 function EllipsisWithAllProps() {
   return (
     <Ellipsis
-      lineClamp={2}
+      maxLines={2}
       ellipsis
       showTooltip
       wrapperClassName="test"

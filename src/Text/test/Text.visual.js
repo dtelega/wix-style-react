@@ -73,9 +73,9 @@ const tests = [
         },
       },
       {
-        it: 'lineClamp',
+        it: 'maxLines',
         props: {
-          lineClamp: 2,
+          maxLines: 2,
           ellipsis: true,
           children:
             'This is a very very long very very long very very long very very long very very long very very long very very long very very long very very long very very long very very long very very long very very long that will be cropped by ellipsis at some point',

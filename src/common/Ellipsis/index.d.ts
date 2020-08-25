@@ -6,7 +6,7 @@ type EllipsisCommonProps = {
   ellipsis?: boolean;
   showTooltip?: boolean;
   wrapperClassName?: string;
-  lineClamp?: number;
+  maxLines?: number;
 };
 
 // Ellipsis

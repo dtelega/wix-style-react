@@ -18,7 +18,7 @@ export const extractEllipsisProps = ({
   showTooltip,
   textAlign,
   zIndex,
-  lineClamp,
+  maxLines,
   ...componentProps
 }) => {
   return {
@@ -38,7 +38,7 @@ export const extractEllipsisProps = ({
       showTooltip,
       textAlign,
       zIndex,
-      lineClamp,
+      maxLines,
     },
     componentProps,
   };

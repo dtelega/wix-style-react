@@ -21,8 +21,8 @@ class Ellipsis extends React.PureComponent {
     /** The render function, use it to render a text you want to truncate with ellipsis. */
     render: PropTypes.func,
 
-    /** lineClamp truncates text at a specific number of lines. */
-    lineClamp: PropTypes.number,
+    /** maxLines truncates text at a specific number of lines. */
+    maxLines: PropTypes.number,
 
     // Tooltip props
     ...TooltipCommonProps,
@@ -95,15 +95,15 @@ class Ellipsis extends React.PureComponent {
   }
 
   _renderText = () => {
-    const { ellipsis, render, lineClamp } = this.props;
+    const { ellipsis, render, maxLines } = this.props;
 
     return render({
       ref: this.ref,
-      ...(lineClamp && { style: { WebkitLineClamp: lineClamp } }),
+      ...(maxLines && { style: { WebkitLineClamp: maxLines } }),
       ellipsisClasses: (...classNames) =>
         [
           ellipsis && classes.text,
-          ellipsis && lineClamp && classes.lineClamp,
+          ellipsis && maxLines && classes.maxLines,
           ...classNames,
         ]
           .filter(Boolean)

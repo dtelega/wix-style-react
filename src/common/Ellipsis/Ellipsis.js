@@ -56,28 +56,33 @@ class Ellipsis extends React.PureComponent {
    * @private
    */
   _updateEllipsisState = () => {
-    const { ellipsis } = this.props;
     const { isActive } = this.state;
     const shouldBeActive =
-      ellipsis && (this._widthCheck() || this._HeightCheck());
+      this._scrollWidthCheck() || this._scrollHeightCheck();
 
     if (shouldBeActive !== isActive)
       this.setState({ isActive: shouldBeActive });
   };
 
-  _widthCheck = () => {
+  _scrollWidthCheck = () => {
     const { current: textElement } = this.ref;
+    const { ellipsis } = this.props;
 
     return (
+      ellipsis &&
       textElement &&
       (textElement.scrollWidth - textElement.parentNode.offsetWidth > 1 ||
         textElement.offsetWidth < textElement.scrollWidth)
     );
   };
 
-  _HeightCheck = () => {
+  _scrollHeightCheck = () => {
     const { current: textElement } = this.ref;
+    const { ellipsis, maxLines } = this.props;
+
     return (
+      maxLines > 1 &&
+      ellipsis &&
       textElement &&
       (textElement.scrollHeight - textElement.parentNode.offsetHeight > 1 ||
         textElement.offsetHeight < textElement.scrollHeight)

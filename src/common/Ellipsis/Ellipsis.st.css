@@ -5,7 +5,7 @@
 
 /* Text */
 .text {
-  white-space: nowrap !important;
+  white-space: normal !important;
   text-overflow: ellipsis !important;
   overflow: hidden !important;
   max-width: 100% !important;
@@ -14,7 +14,6 @@
 }
 
 .maxLines {
-  white-space: normal !important;
   display: -webkit-box !important;
   -webkit-box-orient: vertical;
 }

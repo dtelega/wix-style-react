@@ -58,13 +58,13 @@ class Ellipsis extends React.PureComponent {
   _updateEllipsisState = () => {
     const { isActive } = this.state;
     const shouldBeActive =
-      this._scrollWidthCheck() || this._scrollHeightCheck();
+      this._isOverflowingHorizontally() || this._isOverflowingVertically();
 
     if (shouldBeActive !== isActive)
       this.setState({ isActive: shouldBeActive });
   };
 
-  _scrollWidthCheck = () => {
+  _isOverflowingHorizontally = () => {
     const { current: textElement } = this.ref;
     const { ellipsis } = this.props;
 
@@ -76,7 +76,7 @@ class Ellipsis extends React.PureComponent {
     );
   };
 
-  _scrollHeightCheck = () => {
+  _isOverflowingVertically = () => {
     const { current: textElement } = this.ref;
     const { ellipsis, maxLines } = this.props;
 

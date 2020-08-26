@@ -56,7 +56,6 @@ class DropdownLayout extends React.PureComponent {
   }
 
   componentDidMount() {
-    super.componentDidMount();
     if (this.props.focusOnSelectedOption) {
       this._focusOnSelectedOption();
     }
@@ -309,6 +308,7 @@ class DropdownLayout extends React.PureComponent {
       maxHeightPixels,
       minWidthPixels,
       infiniteScroll,
+      dataHook,
     } = this.props;
 
     const renderedOptions = options.map((option, idx) =>
@@ -317,6 +317,7 @@ class DropdownLayout extends React.PureComponent {
 
     return (
       <div
+        data-hook={dataHook}
         className={st(classes.root, {
           visible,
           withArrow,
@@ -524,6 +525,18 @@ class DropdownLayout extends React.PureComponent {
 
   _isSelectableOption(option) {
     return option && option.value !== '-' && !option.disabled && !option.title;
+  }
+
+  componentWillUnmount() {
+    if (this._boundEvents && typeof document !== 'undefined') {
+      this._boundEvents.forEach(eventName => {
+        document.removeEventListener(
+          eventName,
+          this._onMouseEventsHandler,
+          true,
+        );
+      });
+    }
   }
 }
 

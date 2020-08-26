@@ -5,6 +5,7 @@ import { allValidators, extendPropTypes } from '../utils/propTypes';
 import InputWithOptions from '../InputWithOptions';
 import DropdownLayout from '../DropdownLayout';
 import { st, classes } from './Dropdown.st.css';
+import PropTypes from 'prop-types';
 
 const NO_SELECTED_ID = null;
 
@@ -127,11 +128,11 @@ class Dropdown extends InputWithOptions {
 Dropdown.propTypes = {
   ...InputWithOptions.propTypes,
   /** THIS PROP WAS REMOVED */
-  withArrow: DropdownLayout.propTypes.withArrow,
+  withArrow: PropTypes.bool,
   /** Sets the selected option id. (Implies Controlled mode) */
-  selectedId: DropdownLayout.propTypes.selectedId,
+  selectedId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** An initial selected option id. (Implies Uncontrolled mode) */
-  initialSelectedId: DropdownLayout.propTypes.selectedId,
+  initialSelectedId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 extendPropTypes(Dropdown, {

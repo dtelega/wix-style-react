@@ -3,7 +3,6 @@ import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
 import { allValidators, extendPropTypes } from '../utils/propTypes';
 import InputWithOptions from '../InputWithOptions';
-import DropdownLayout from '../DropdownLayout';
 import { st, classes } from './Dropdown.st.css';
 import PropTypes from 'prop-types';
 
@@ -137,7 +136,7 @@ Dropdown.propTypes = {
 
 extendPropTypes(Dropdown, {
   selectedId: allValidators(
-    DropdownLayout.propTypes.selectedId,
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     (props, propName) => {
       if (
         props[propName] !== undefined &&

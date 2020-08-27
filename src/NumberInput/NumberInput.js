@@ -109,7 +109,7 @@ class NumberInput extends React.PureComponent {
   };
 
   render() {
-    // <Input /> should always be controlled. Therefore, not passing defaultValue to <Input />.
+    // <Input/> should always be controlled. Therefore, not passing defaultValue to <Input/>.
     const { suffix, defaultValue, strict, max, min, ...props } = this.props;
     const value = this._getInputValueFromState();
 

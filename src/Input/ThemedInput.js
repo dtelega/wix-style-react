@@ -2,10 +2,11 @@ import React from 'react';
 import Input from './Input';
 import { st, classes } from './Input.st.css';
 import DATA_ATTR from './DataAttr';
+import { filterObject } from '../utils/filterObject';
 
 class ThemedInput extends Input {
   // For testing purposes only
-  getDataAttr = () => {
+  _getDataAttr = () => {
     const {
       size,
       status,
@@ -17,8 +18,8 @@ class ThemedInput extends Input {
       noRightBorderRadius,
     } = this.props;
 
-    return Object.fromEntries(
-      Object.entries({
+    return filterObject(
+      {
         [DATA_ATTR.SIZE]: size,
         [DATA_ATTR.STATUS]: status,
         [DATA_ATTR.PREFIX]: !!prefix,
@@ -27,7 +28,8 @@ class ThemedInput extends Input {
         [DATA_ATTR.FOCUS]: !!(forceFocus || this.state.focus),
         [DATA_ATTR.LEFTBORDERRADIUS]: !!noLeftBorderRadius,
         [DATA_ATTR.RIGHTBORDERRADIUS]: !!noRightBorderRadius,
-      }).filter(entry => !!entry[1]),
+      },
+      (key, value) => !!value,
     );
   };
 
@@ -67,7 +69,7 @@ class ThemedInput extends Input {
         )}
         dir={rtl ? 'rtl' : null}
         data-hook={dataHook}
-        {...this.getDataAttr()}
+        {...this._getDataAttr()}
       >
         {super.render({ placeholder })}
       </div>

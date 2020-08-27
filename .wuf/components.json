@@ -152,6 +152,9 @@
   "FacesRatingBar": {
     "path": "src/FacesRatingBar"
   },
+  "FeatureList": {
+    "path": "src/FeatureList"
+  },
   "FilePicker": {
     "path": "src/FilePicker"
   },
@@ -256,6 +259,9 @@
   },
   "MarketingPageLayout": {
     "path": "src/MarketingPageLayout"
+  },
+  "MarketingPageLayoutContent": {
+    "path": "src/MarketingPageLayoutContent"
   },
   "MediaOverlay": {
     "path": "src/MediaOverlay"

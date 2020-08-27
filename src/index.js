@@ -180,3 +180,5 @@ export { default as FacesRatingBar } from './FacesRatingBar';
 export { default as ThemeProvider } from './ThemeProvider';
 export { default as TableListItem } from './TableListItem';
 export { default as TestimonialList } from './TestimonialList';
+export { default as FeatureList } from './FeatureList';
+export { default as MarketingPageLayoutContent } from './MarketingPageLayoutContent';
